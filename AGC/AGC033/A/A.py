@@ -8,12 +8,12 @@ S:list[list[str]] = [list(input()) for i in range(H)]
 
 # print("S: ", S, type(S), S[0], S[1][2])
 
-visited = [[False]*W for _ in range(H)]
-print("visited: ", visited, type(visited), visited[0], visited[1][2])
+dist = [[-1]*W for _ in range(H)]
+start_x, start_y = 0, 0
+dist[start_x][start_y] = 0
 
 q = deque()
-q.append((0, 0))  # スタート位置
-visited[0][0] = True  # スタート地点を訪問済みにする
+q.append((start_x, start_y))  # スタート位置
 
 while q:
     x, y = q.popleft()
@@ -28,14 +28,18 @@ while q:
             continue
 
         # 壁か、すでに訪れた場所ならスキップ
-        if S[nx][ny] == '#' or visited[nx][ny]:
+        if S[nx][ny] == '#' or dist[nx][ny] != -1:
             continue
 
         # まだ訪れてない道なら、キューに追加して訪問記録
-        visited[nx][ny] = True
+        dist[nx][ny] = dist[x][y] + 1
         q.append((nx, ny))
 
     print("キューの中身: ", q)
+    print("dist: ", dist)
       
+print("dist: ", dist)
 
-print("visited: ", visited, type(visited), visited[0], visited[1][2])
+max_dist = max(max(row) for row in dist)
+
+print(max_dist)
