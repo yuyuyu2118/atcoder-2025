@@ -1,39 +1,41 @@
+from collections import deque
+
 H, W = map(int, input().split())
 
 # print(H, W , type(H), type(W))
 
 S:list[list[str]] = [list(input()) for i in range(H)]
 
-print("S: ", S, type(S), S[0], S[1][2])
+# print("S: ", S, type(S), S[0], S[1][2])
 
-"""
-クラスを使って管理する
-一つ一つのNodeが上下左右の隣接するマスが# or .かいう情報を持っておく。変数はリストでisBlack, isWhite
-自分のNodeが# or .という情報を持っておく。変数はisBlack, isWhite
-そのNodeの座標を持っておく。変数はx,y
+visited = [[False]*W for _ in range(H)]
+print("visited: ", visited, type(visited), visited[0], visited[1][2])
 
-#の時は、隣接するマスを#に変換する
-.の時は、無視
-"""
+q = deque()
+q.append((0, 0))  # スタート位置
+visited[0][0] = True  # スタート地点を訪問済みにする
 
-class Node():
-  def __init__(self, x:int, y:int, S:list[list[str]]):
-    self.S = S
-    self.x = x
-    self.y = y
-    self.isBlack = False
-    self.isWhite = False
-    self.surrounding = [-1] * 4
+while q:
+    x, y = q.popleft()
+    print(f"今見るマス: ({x}, {y})")
 
-    self.isBlack =  True if S[x][y] == "#" else False
-    self.isWhite =  True if S[x][y] == "." else False
+    # 4方向をチェック
+    for dx, dy in [(1,0), (-1,0), (0,1), (0,-1)]:
+        nx, ny = x + dx, y + dy
 
-    self.surrounding[0] = 1 if x + 1 < H and S[x+1][y] == "#" else (0 if x + 1 < H else -1) # 下
-    self.surrounding[1] = 1 if x - 1 >= 0 and S[x-1][y] == "#" else (0 if x + 1 < H else -1) # 上
-    self.surrounding[2] = 1 if y + 1 < W and S[x][y+1] == "#" else (0 if x + 1 < H else -1) # 右
-    self.surrounding[3] = 1 if y - 1 >= 0 and S[x][y-1] == "#" else (0 if x + 1 < H else -1) # 左
+        # 範囲外チェック
+        if not (0 <= nx < H and 0 <= ny < W):
+            continue
 
-  def __str__(self):
-    return f"Node({self.x}, {self.y}, {self.S}) isBlack: {self.isBlack}, isWhite: {self.isWhite}, surrounding: {self.surrounding})"
+        # 壁か、すでに訪れた場所ならスキップ
+        if S[nx][ny] == '#' or visited[nx][ny]:
+            continue
 
-print(Node(1,1,S))
+        # まだ訪れてない道なら、キューに追加して訪問記録
+        visited[nx][ny] = True
+        q.append((nx, ny))
+
+    print("キューの中身: ", q)
+      
+
+print("visited: ", visited, type(visited), visited[0], visited[1][2])
