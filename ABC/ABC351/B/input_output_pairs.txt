@@ -1,0 +1,39 @@
+3
+abc
+def
+ghi
+abc
+bef
+ghi
+
+2 1
+
+1
+f
+q
+
+1 1
+
+10
+eixfumagit
+vtophbepfe
+pxbfgsqcug
+ugpugtsxzq
+bvfhxyehfk
+uqyfwtmglr
+jaitenfqiq
+acwvufpfvv
+jhaddglpva
+aacxsyqvoj
+eixfumagit
+vtophbepfe
+pxbfgsqcug
+ugpugtsxzq
+bvfhxyehok
+uqyfwtmglr
+jaitenfqiq
+acwvufpfvv
+jhaddglpva
+aacxsyqvoj
+
+5 9
