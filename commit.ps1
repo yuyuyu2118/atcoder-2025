@@ -51,7 +51,7 @@ if ($dayInput -notmatch '^\d+$') {
     exit
 }
 
-$dateInput = "2025-5-${dayInput}"
+$dateInput = "2025-6-${dayInput}"
 
 # コミットメッセージの入力を受け取る
 $commitMessage = Read-Input "コミットメッセージを入力してください："
