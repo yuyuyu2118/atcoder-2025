@@ -62,8 +62,8 @@ if ([string]::IsNullOrWhiteSpace($choice)) {
     $choice = 'file'
 }
 
-# ランダムな時間を生成（8時から17時59分まで）
-$randomHour = Get-Random -Minimum 8 -Maximum 18
+# ランダムな時間を生成（6時から17時59分まで）
+$randomHour = Get-Random -Minimum 6 -Maximum 23
 $randomMinute = Get-Random -Minimum 0 -Maximum 60
 $commitDateString = "$dateInput ${randomHour}:${randomMinute}:00"
 
